@@ -116,26 +116,6 @@ ul li a:hover span.instagram-icon {
     filter: drop-shadow(0 0 3px #e1306c);
 }
 
-ol {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: left;
-}
-
-ol li {
-    padding: 10px 15px;
-    margin-bottom: 8px;
-    border-left: 5px solid #3498db;
-    background-color: #ecf0f1;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
 .gallery {
     display: flex;
     flex-wrap: wrap;
@@ -150,4 +130,21 @@ ol li {
     height: auto;
     border-radius: 10px;
     object-fit: cover;
+}
+
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    background: linear-gradient(135deg, #004d40, #006064);
+    color: #fff;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+}
+
+footer p {
+    margin: 0;
+    color: #e0f7fa;
 }
