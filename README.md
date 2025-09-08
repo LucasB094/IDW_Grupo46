@@ -1,3 +1,7 @@
+Repertorio github
+https://github.com/LucasB094/IDW_Grupo46
+
+
 GRUPO 46
 1) BENITEZ, LUCAS
 2) CABRERA, ALEXIS
