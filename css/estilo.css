@@ -116,7 +116,7 @@ ul li a:hover span.instagram-icon {
     filter: drop-shadow(0 0 3px #e1306c);
 }
 
-.gallery {
+.galeria {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
