@@ -1,74 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clínica Grupo 46</title>
-    <link rel="stylesheet" href="css/estilo.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clínica Grupo 46</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-    <header>
-        <img src="imagen/logo-para-la-pagina.png" alt="Logo de la Clínica" style="height: 80px;">
-        <h1>Clínica Grupo 46</h1>
-        <p>Clínica Grupo 46: aprobando tu salud y nuestro TP.</p>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="servicios.html">Servicios</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-    </nav>
-    <main>
-        <h2>Nuestros Profesionales</h2>
-        <ul>
-            <li>
-                <a href="https://www.instagram.com/lucasbenitez10_/">
-                    <span class="instagram-icon"></span> Dr. Benítez Lucas - Cardiología
-                </a>
-            </li>
-            <li>
-                <a href="https://www.instagram.com/alexiscabrera14/">
-                    <span class="instagram-icon"></span> Dr. Cabrera Alexis - Pediatría
-                </a>
-            </li>
-            <li>
-                <a href="https://www.instagram.com/flaa_morilla/">
-                    <span class="instagram-icon"></span> Dra. Morilla Flavia - Dermatología
-                </a>
-            </li>
-            <li>
-                <a href="https://www.instagram.com/berthetkev/">
-                    <span class="instagram-icon"></span> Dr. Berthet Kevin - Neurología
-                </a>
-            </li>
-        </ul>
-
-        <h2>Obras Sociales</h2>
-        <ul id="obras-sociales">
-            <li>OSDE</li>
-            <li>Swiss Medical</li>
-            <li>Galeno</li>
-            <li>Medifé</li>
-            <li>Omint</li>
-            <li>OSECAC</li>
-            <li>Sancor Salud</li>
-            <li>Jerárquicos Salud</li>
-            <li>OSPE</li>
-            <li>Prevención Salud</li>
-        </ul>
-
-        <h2>Nuestras Instalaciones</h2>
-        <div class="gallery">
-            <img src="imagen/galeria/recepcion.png" alt="Recepción">
-            <img src="imagen/galeria/consultorio.jpg" alt="Consultorio">
-            <img src="imagen/galeria/sala-de-espera.jpg" alt="Sala de espera">
-            <img src="imagen/galeria/equipo-medico.png" alt="Equipo médico">
+  <header class="py-3 mb-4 bg-primary text-white">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <img src="imagen/logo-para-la-pagina.png" alt="Logo de la Clínica" height="60" class="me-3 rounded-circle shadow-sm">
+        <div>
+          <h1 class="h4 m-0">Clínica Grupo 46</h1>
+          <p class="small m-0 opacity-75">aprobando tu salud y nuestro TP.</p>
         </div>
-    </main>
+      </div>
+    </div>
+  </header>
 
-    <footer>
-        <p>&copy; 2025 Clínica Grupo 46 - TP Facultad</p>
-    </footer>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="index.html">Clínica 46</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="mb-5">
+      <h2 class="text-center fw-bold mb-4">NUESTROS PROFESIONALES</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        <div class="col">
+          <div class="card h-100 border-0 shadow-sm rounded-4 hover-lift">
+            <img src="imagen/profesionales/benitez.jpg" class="card-img-top rounded-top" alt="Dr. Benítez Lucas">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title fw-bold text-primary">Dr. Benítez Lucas</h5>
+              <p class="card-text text-muted">Cardiología</p>
+              <a href="https://www.instagram.com/lucasbenitez10_/" class="btn btn-outline-primary mt-auto rounded-pill" target="_blank">
+                <i class="fab fa-instagram me-2"></i> Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 border-0 shadow-sm rounded-4 hover-lift">
+            <img src="imagen/profesionales/cabrera.jpg" class="card-img-top rounded-top" alt="Dr. Cabrera Alexis">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title fw-bold text-primary">Dr. Cabrera Alexis</h5>
+              <p class="card-text text-muted">Pediatría</p>
+              <a href="https://www.instagram.com/alexiscabrera14/" class="btn btn-outline-primary mt-auto rounded-pill" target="_blank">
+                <i class="fab fa-instagram me-2"></i> Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 border-0 shadow-sm rounded-4 hover-lift">
+            <img src="imagen/profesionales/morilla.jpg" class="card-img-top rounded-top" alt="Dra. Morilla Flavia">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title fw-bold text-primary">Dra. Morilla Flavia</h5>
+              <p class="card-text text-muted">Dermatología</p>
+              <a href="https://www.instagram.com/flaa_morilla/" class="btn btn-outline-primary mt-auto rounded-pill" target="_blank">
+                <i class="fab fa-instagram me-2"></i> Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 border-0 shadow-sm rounded-4 hover-lift">
+            <img src="imagen/profesionales/berthet.jpg" class="card-img-top rounded-top" alt="Dr. Berthet Kevin">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title fw-bold text-primary">Dr. Berthet Kevin</h5>
+              <p class="card-text text-muted">Neurología</p>
+              <a href="https://www.instagram.com/berthetkev/" class="btn btn-outline-primary mt-auto rounded-pill" target="_blank">
+                <i class="fab fa-instagram me-2"></i> Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5">
+      <h2 class="text-center fw-bold mb-4">OBRAS SOCIALES QUE ACEPTAMOS</h2>
+      <div class="d-flex flex-wrap justify-content-center gap-2">
+        <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">OSDE</button>
+        <button class="btn btn-outline-success btn-sm rounded-pill px-3">Swiss Medical</button>
+        <button class="btn btn-outline-info btn-sm rounded-pill px-3">Galeno</button>
+        <button class="btn btn-outline-warning btn-sm rounded-pill px-3">Medifé</button>
+        <button class="btn btn-outline-danger btn-sm rounded-pill px-3">Omint</button>
+        <button class="btn btn-outline-dark btn-sm rounded-pill px-3">OSECAC</button>
+        <button class="btn btn-outline-primary btn-sm rounded-pill px-3">Sancor Salud</button>
+        <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">Jerárquicos Salud</button>
+        <button class="btn btn-outline-success btn-sm rounded-pill px-3">OSPE</button>
+        <button class="btn btn-outline-info btn-sm rounded-pill px-3">Prevención Salud</button>
+      </div>
+    </section>
+
+    <section class="mb-5">
+      <h2 class="text-center fw-bold mb-4">NUESTRAS INSTALACIONES</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        <div class="col">
+          <img src="imagen/galeria/recepcion.png" class="img-fluid rounded" alt="Recepción">
+        </div>
+        <div class="col">
+          <img src="imagen/galeria/consultorio.jpg" class="img-fluid rounded" alt="Consultorio">
+        </div>
+        <div class="col">
+          <img src="imagen/galeria/sala-de-espera.jpg" class="img-fluid rounded" alt="Sala de espera">
+        </div>
+        <div class="col">
+          <img src="imagen/galeria/equipo-medico.png" class="img-fluid rounded" alt="Equipo médico">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-primary text-white text-center py-3">
+    <p class="mb-0">&copy; 2025 Clínica Grupo 46 - TP Facultad</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
