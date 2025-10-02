@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -10,19 +10,17 @@
 </head>
 <body>
   <header class="py-3 mb-4">
-    <div class="container d-flex align-items-center justify-content-between">
-      <div class="d-flex align-items-center">
-        <img src="imagen/logo-para-la-pagina.png" alt="Logo de la Clínica" height="60" class="me-3 rounded-circle shadow-sm">
-        <div>
-          <h1 class="h4 m-0">Clínica Grupo 46</h1>
-          <p class="small m-0 opacity-75">Aprobando tu salud y nuestro TP.</p>
-        </div>
+  <div class="container d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+      <img src="imagen/logo-para-la-pagina.png" alt="Logo de la Clínica" height="60" class="me-3 rounded-circle shadow-sm">
+      <div>
+        <h1 class="h4 m-0 text-white">Clínica Grupo 46</h1>
+        <p class="small m-0 opacity-75 text-white-50">Aprobando tu salud y nuestro TP.</p>
       </div>
-      <button id="darkModeToggle" class="btn btn-sm btn-outline-light">
-        🌙 Modo Oscuro
-      </button>
     </div>
-  </header>
+    <button id="darkModeToggle" class="btn btn-sm btn-outline-light">🌙 Modo Oscuro</button>
+  </div>
+</header>
 
   <nav class="navbar navbar-expand-lg navbar-light border-bottom shadow-sm mb-4">
     <div class="container">
@@ -32,7 +30,7 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
           <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
           <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
         </ul>
@@ -136,17 +134,20 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    if (localStorage.getItem('darkMode') === 'enabled') {
-      document.body.classList.add('dark-mode');
-      document.getElementById('darkModeToggle').innerHTML = '☀️ Modo Claro';
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '☀️ Modo Claro';
+      }
+
+      darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+        darkModeToggle.innerHTML = isDark ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
+      });
     }
-    document.getElementById('darkModeToggle').addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      const isDark = document.body.classList.contains('dark-mode');
-      localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
-      document.getElementById('darkModeToggle').innerHTML = 
-        isDark ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
-    });
   </script>
 </body>
 </html>

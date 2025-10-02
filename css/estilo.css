@@ -103,7 +103,8 @@ h2::after {
   content: '';
   position: absolute;
   bottom: -8px;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 60px;
   height: 4px;
   background-color: var(--link-color);
@@ -169,24 +170,6 @@ h2::after {
   transition: all 0.3s ease;
 }
 
-ul li:hover {
-    transform: translateX(5px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-}
-
-ul li a:hover span.instagram-icon {
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 3px #e1306c);
-}
-
-.gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px;
-}
-
 .img-fluid {
   border-radius: 10px;
   box-shadow: 0 4px 8px var(--shadow-light);
@@ -220,8 +203,42 @@ footer p {
   box-shadow: 0 12px 24px var(--shadow-medium);
 }
 
+body.dark-mode .card,
+body.dark-mode .list-group-item {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--card-border);
+}
+
+body.dark-mode .list-group-item:hover {
+  background-color: #2d2d2d;
+}
+
+body.dark-mode .card-title,
+body.dark-mode .card-text {
+  color: var(--text-color);
+}
+
+body.dark-mode .list-group-item i {
+  color: var(--footer-text);
+}
+
+body.dark-mode .list-group-item i:hover {
+  color: var(--link-hover);
+}
+
+body.dark-mode .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 @media (max-width: 768px) {
-  .card { margin-bottom: 1rem; }
-  h2 { font-size: 1.5rem; }
-  header img { height: 50px; }
+  .card {
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  header img {
+    height: 50px;
+  }
 }
