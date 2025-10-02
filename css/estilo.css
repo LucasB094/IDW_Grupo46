@@ -1,149 +1,200 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #e0f7fa, #ffe0b2);
-    color: #333;
-    text-align: center;
-    padding: 30px 20px;
+  background-color: #fafafa;
+  color: #212529;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
 }
 
 header {
-    margin-bottom: 40px;
+  background-color: #004d6b;
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-header a {
-    text-decoration: none;
-    color: #fff;
-    background-color: #0077b6;
-    padding: 12px 22px;
-    margin: 0 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: all 0.3s ease;
+header img {
+  height: 60px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
 }
 
-header a:hover {
-    background-color: #0096c7;
-    transform: scale(1.1);
+header img:hover {
+  transform: scale(1.05);
 }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    color: #006064;
+header h1 {
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+  font-weight: 600;
+}
+
+header p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+  font-weight: 400;
+}
+
+.navbar {
+  background-color: white !important;
+  border-bottom: 1px solid #dee2e6;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: #004d6b !important;
+  font-size: 1.1rem;
+}
+
+.nav-link {
+  color: #004d6b !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #003a52 !important;
+  background-color: #e3f2fd;
+  border-radius: 6px;
 }
 
 h2 {
-    font-size: 2rem;
-    margin: 30px 0 15px;
-    color: #004d40;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  color: #004d6b;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  position: relative;
 }
 
-p {
-    font-size: 1.3rem;
-    color: #006064;
-    font-weight: 500;
-    margin-bottom: 25px;
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background-color: #004d6b;
+  border-radius: 2px;
 }
 
-img {
-    max-width: 180px;
-    border-radius: 20px;
-    margin-bottom: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
+.card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: white;
 }
 
-img:hover {
-    transform: scale(1.05) rotate(-1deg);
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    display: inline-block;
-    text-align: left;
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2px solid #e9ecef;
 }
 
-ul li {
-    font-size: 1.15rem;
-    margin: 10px 0;
-    padding: 12px 15px;
-    border-radius: 12px;
-    background: linear-gradient(120deg, #ffffff, #e0f2f1);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.card-title {
+  color: #004d6b;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-ul li a {
-    text-decoration: none;
-    color: #004d40;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 500;
+.card-text {
+  color: #6c757d;
+  font-size: 0.95rem;
 }
 
-ul li a span.instagram-icon {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transition: transform 0.3s ease, filter 0.3s ease;
+.btn-outline-primary {
+  border-color: #004d6b;
+  color: #004d6b;
+  font-weight: 600;
+  border-radius: 20px;
+  transition: all 0.3s ease;
 }
 
-ul li:hover {
-    transform: translateX(5px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+.btn-outline-primary:hover {
+  background-color: #004d6b;
+  color: white;
+  border-color: #004d6b;
+  transform: scale(1.05);
 }
 
-ul li a:hover span.instagram-icon {
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 3px #e1306c);
+.btn-outline-secondary,
+.btn-outline-success,
+.btn-outline-info,
+.btn-outline-warning,
+.btn-outline-danger,
+.btn-outline-dark,
+.btn-outline-primary {
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  border-width: 2px;
+  transition: all 0.3s ease;
 }
 
-.gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px;
+.btn-outline-secondary:hover,
+.btn-outline-success:hover,
+.btn-outline-info:hover,
+.btn-outline-warning:hover,
+.btn-outline-danger:hover,
+.btn-outline-dark:hover,
+.btn-outline-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.gallery img {
-    width: 80%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
+.img-fluid {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.img-fluid:hover {
+  transform: scale(1.03);
 }
 
 footer {
-    margin-top: 50px;
-    padding: 20px;
-    background: linear-gradient(135deg, #004d40, #006064);
-    color: #fff;
-    border-radius: 12px;
-    font-weight: 500;
-    font-size: 1.1rem;
-    box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+  background: #004d6b;
+  color: white;
+  padding: 1rem 0;
+  font-weight: 500;
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 footer p {
-    margin: 0;
-    color: #e0f7fa;
+  margin: 0;
+  color: #e0f7fa;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  header img {
+    height: 50px;
+  }
 }
