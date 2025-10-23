@@ -1,13 +1,13 @@
-
 if (localStorage.getItem('loggedIn') !== 'true') {
-  window.location.href = 'login.html';
+  window.location.href = 'index.html';
 }
 
+const doctorModalEl = document.getElementById('doctorModal');
+const doctorModal = new bootstrap.Modal(doctorModalEl);
+const viewModal = new bootstrap.Modal(document.getElementById('viewModal'));
 
 const getDoctors = () => JSON.parse(localStorage.getItem('doctors')) || [];
 const setDoctors = (doctors) => localStorage.setItem('doctors', JSON.stringify(doctors));
-
-
 const getSpecialties = () => JSON.parse(localStorage.getItem('specialties')) || [];
 
 const showSuccessMessage = (message) => {
@@ -33,7 +33,7 @@ const renderTable = () => {
       <td>${doctor.id}</td>
       <td>${doctor.name}</td>
       <td>${doctor.specialty}</td>
-      <td>
+      <td class="text-end">
         <button class="btn btn-info btn-sm viewBtn" data-id="${doctor.id}" title="Ver detalles">
           <i class="fas fa-eye"></i>
         </button>
@@ -49,17 +49,17 @@ const renderTable = () => {
   });
 };
 
-
 const populateSpecialtiesSelect = () => {
   const specialties = getSpecialties();
   const select = document.getElementById('doctorSpecialty');
-  select.innerHTML = ''; 
+  select.innerHTML = '';
   
   if (specialties.length === 0) {
     select.innerHTML = '<option value="" disabled>No hay especialidades creadas</option>';
     return;
   }
   
+  select.innerHTML = '<option value="" disabled selected>Seleccione una especialidad</option>';
   specialties.forEach(spec => {
     const option = document.createElement('option');
     option.value = spec.name;
@@ -75,21 +75,21 @@ const showForm = (doctor = {}) => {
   document.getElementById('doctorImage').value = doctor.image || '';
   document.getElementById('doctorInstagram').value = doctor.instagram || '';
   
-
   populateSpecialtiesSelect();
   document.getElementById('doctorSpecialty').value = doctor.specialty || '';
   
-  document.getElementById('doctorFormContainer').style.display = 'block';
-  document.getElementById('doctorFormContainer').scrollIntoView({ behavior: 'smooth' });
+  doctorModal.show();
 };
 
 const hideForm = () => {
-  document.getElementById('doctorFormContainer').style.display = 'none';
-  document.getElementById('doctorForm').reset();
+  doctorModal.hide();
 };
 
+doctorModalEl.addEventListener('hidden.bs.modal', () => {
+  document.getElementById('doctorForm').reset();
+});
+
 document.getElementById('newDoctor').addEventListener('click', () => showForm());
-document.getElementById('cancelForm').addEventListener('click', hideForm);
 
 document.getElementById('doctorForm').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -97,7 +97,7 @@ document.getElementById('doctorForm').addEventListener('submit', (e) => {
   const newDoctor = {
     id: id || (Math.max(...getDoctors().map(d => d.id), 0) + 1),
     name: document.getElementById('doctorName').value,
-    specialty: document.getElementById('doctorSpecialty').value, // Lee el valor del <select>
+    specialty: document.getElementById('doctorSpecialty').value,
     image: document.getElementById('doctorImage').value,
     instagram: document.getElementById('doctorInstagram').value,
   };
@@ -124,8 +124,7 @@ document.addEventListener('click', (e) => {
     document.getElementById('viewImagePreview').src = doctor.image;
     document.getElementById('viewInstagram').textContent = doctor.instagram;
     document.getElementById('viewInstagram').href = doctor.instagram;
-    const modal = new bootstrap.Modal(document.getElementById('viewModal'));
-    modal.show();
+    viewModal.show();
   } else if (e.target.closest('.editBtn')) {
     const id = parseInt(e.target.closest('.editBtn').dataset.id);
     const doctor = getDoctors().find(d => d.id === id);

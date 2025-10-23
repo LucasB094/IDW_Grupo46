@@ -1,7 +1,9 @@
-
 if (localStorage.getItem('loggedIn') !== 'true') {
-  window.location.href = 'login.html';
+  window.location.href = 'index.html';
 }
+
+const specialtyModalEl = document.getElementById('specialtyModal');
+const specialtyModal = new bootstrap.Modal(specialtyModalEl);
 
 const getSpecialties = () => JSON.parse(localStorage.getItem('specialties')) || [];
 const setSpecialties = (specialties) => localStorage.setItem('specialties', JSON.stringify(specialties));
@@ -28,7 +30,7 @@ const renderTable = () => {
     tr.innerHTML = `
       <td>${spec.id}</td>
       <td>${spec.name}</td>
-      <td>
+      <td class="text-end">
         <button class="btn btn-warning btn-sm editBtn" data-id="${spec.id}" title="Editar">
           <i class="fas fa-edit"></i>
         </button>
@@ -45,17 +47,18 @@ const showForm = (spec = {}) => {
   document.getElementById('formTitle').textContent = spec.id ? 'Modificar Especialidad' : 'Nueva Especialidad';
   document.getElementById('specialtyId').value = spec.id || '';
   document.getElementById('specialtyName').value = spec.name || '';
-  document.getElementById('specialtyFormContainer').style.display = 'block';
-  document.getElementById('specialtyFormContainer').scrollIntoView({ behavior: 'smooth' });
+  specialtyModal.show();
 };
 
 const hideForm = () => {
-  document.getElementById('specialtyFormContainer').style.display = 'none';
-  document.getElementById('specialtyForm').reset();
+  specialtyModal.hide();
 };
 
+specialtyModalEl.addEventListener('hidden.bs.modal', () => {
+  document.getElementById('specialtyForm').reset();
+});
+
 document.getElementById('newSpecialty').addEventListener('click', () => showForm());
-document.getElementById('cancelForm').addEventListener('click', hideForm);
 
 document.getElementById('specialtyForm').addEventListener('submit', (e) => {
   e.preventDefault();

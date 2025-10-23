@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { href: 'contacto.html', text: 'Contacto' }
   ];
 
- 
+  
   const adminNavItems = [
     { href: 'admin.html', text: 'Admin Médicos' },
     { href: 'admin-especialidades.html', text: 'Admin Especialidades' }
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let navHTML = '';
 
-  
+ 
   navItems.forEach(item => {
     navHTML += `<li class="nav-item"><a class="nav-link" href="${item.href}">${item.text}</a></li>`;
   });
@@ -29,11 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     adminNavItems.forEach(item => {
       navHTML += `<li class="nav-item"><a class="nav-link fw-bold text-primary" href="${item.href}">${item.text}</a></li>`;
     });
-    
+   
     navHTML += `<li class="nav-item"><a class="nav-link btn btn-outline-danger btn-sm text-danger px-2" id="logoutBtn" href="#">Cerrar Sesión</a></li>`;
   } else {
-  
-    navHTML += `<li class="nav-item"><a class="nav-link" href="login.html">Iniciar Sesión</a></li>`;
+   
+    navHTML += `<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</a></li>`;
   }
 
   navContainer.innerHTML = navHTML;
