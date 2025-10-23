@@ -1,3 +1,6 @@
+USUARIO DE LA PAGINA: admin
+CLAVE: 1234
+
 Repertorio github
 https://github.com/LucasB094/IDW_Grupo46
 
