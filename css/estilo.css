@@ -433,3 +433,128 @@ body.dark-mode .table {
 body.dark-mode .table-responsive {
   border-color: #495057;
 }
+
+/* ===========================
+   MODALES LINDOS 💅
+   =========================== */
+
+/* Backdrop con blur y tono */
+.modal-backdrop.show {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background-color: rgba(12, 14, 20, .35);
+}
+
+/* Animación: zoom + slide suave */
+.modal.fade .modal-dialog {
+  transform: translateY(16px) scale(.98);
+  transition:
+    transform .35s cubic-bezier(.2,.7,.2,1),
+    opacity .35s ease;
+  opacity: .0;
+}
+.modal.show .modal-dialog {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Contenedor principal con glassmorphism sutil */
+.modal-content {
+  border: 0;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .25);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.85));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Header con leve degradé y separación suave */
+.modal-header {
+  border: 0;
+  padding: 1rem 1.25rem 0.5rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,0));
+}
+.modal-title {
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+/* Footer sin borde duro */
+.modal-footer {
+  border: 0;
+  padding-top: 0;
+}
+
+/* Botón de cierre más visible sobre fondos claros/oscuros */
+.btn-close {
+  filter: brightness(0) saturate(0) invert(20%);
+  opacity: .6;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.btn-close:hover { opacity: 1; transform: scale(1.05); }
+
+/* Inputs más “premium” */
+.modal-content .form-control,
+.modal-content .form-select {
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.08);
+  transition: box-shadow .2s ease, border-color .2s ease, transform .05s ease;
+}
+.modal-content .form-control:focus,
+.modal-content .form-select:focus {
+  border-color: rgba(25,135,84,.45); /* tono Bootstrap success */
+  box-shadow: 0 0 0 .2rem rgba(25,135,84,.15);
+  transform: translateY(-1px);
+}
+
+/* Botones principales con sombra suave */
+.modal-content .btn.btn-success,
+.modal-content .btn.btn-primary {
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(25,135,84,.25);
+}
+.modal-content .btn.btn-secondary {
+  border-radius: 12px;
+}
+
+/* Tarjeta de login “avatar” si la usás */
+.login-modal-custom .login-avatar {
+  width: 80px; height: 80px; object-fit: cover;
+  border: 3px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,.2);
+}
+.login-modal-custom .login-avatar-container {
+  position: absolute; left: 50%; top: 100%;
+  transform: translate(-50%, -50%);
+}
+
+/* Dark mode (si tu toggle agrega .dark-mode al body) */
+body.dark-mode .modal-content {
+  background: linear-gradient(180deg, rgba(22,24,29,.85), rgba(22,24,29,.92));
+  color: #e8eaed;
+}
+body.dark-mode .modal-header {
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+}
+body.dark-mode .btn-close {
+  filter: invert(1) opacity(.8);
+}
+body.dark-mode .modal-content .form-control,
+body.dark-mode .modal-content .form-select {
+  background: rgba(255,255,255,.03);
+  color: #e8eaed;
+  border-color: rgba(255,255,255,.08);
+}
+body.dark-mode .modal-content .form-control::placeholder {
+  color: rgba(232,234,237,.55);
+}
+
+/* Respeto accesibilidad: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .modal.fade .modal-dialog,
+  .modal.show .modal-dialog {
+    transition: none;
+    transform: none;
+  }
+}
