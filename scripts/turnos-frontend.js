@@ -3,7 +3,7 @@ function ensureObrasSeed() {
   try {
     const raw = localStorage.getItem('obras');
     const arr = raw ? JSON.parse(raw) : [];
-    if (Array.isArray(arr) && arr.length > 0) return; // ya hay obras
+    if (Array.isArray(arr) && arr.length > 0) return; 
 
     const seedNames = [
       'OSDE','Swiss Medical','Galeno','Medifé','Omint',
