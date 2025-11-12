@@ -1,26 +1,21 @@
+import { login, isAuthenticated } from './api/auth.js';
+
 document.addEventListener('DOMContentLoaded', () => {
- 
-  if (localStorage.getItem('loggedIn') === 'true') {
-    window.location.href = 'admin.html';
-  }
+  if (isAuthenticated()) window.location.href = 'admin.html';
 
+  const form = document.getElementById('loginForm');
+  if (!form) return;
 
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
 
-  const loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-    
-      const username = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      
-     
-      if (username === 'admin' && password === '1234') {
-        localStorage.setItem('loggedIn', 'true');
-        window.location.href = 'admin.html';
-      } else {
-        alert('Credenciales incorrectas');
-      }
-    });
-  }
+    try {
+      await login(username, password);
+      window.location.href = 'admin.html';
+    } catch (err) {
+      alert(err.message || 'Credenciales incorrectas');
+    }
+  });
 });
