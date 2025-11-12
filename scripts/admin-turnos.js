@@ -1,20 +1,16 @@
-// =======================================
-//  scripts/admin-turnos.js
-// =======================================
-
 import './guard.js';
 
-// Modales Bootstrap
+
 const viewModal = new bootstrap.Modal(document.getElementById('viewTurnoModal'));
 const formModal = new bootstrap.Modal(document.getElementById('turnoModal'));
 
-// Storage helpers
+
 const getTurnos   = () => JSON.parse(localStorage.getItem('turnos'))   || [];
 const setTurnos   = (arr) => localStorage.setItem('turnos', JSON.stringify(arr));
 const getDoctors  = () => JSON.parse(localStorage.getItem('doctors'))  || JSON.parse(localStorage.getItem('medicos')) || [];
 const getReservas = () => JSON.parse(localStorage.getItem('reservas')) || [];
 
-// UI helper
+
 const ok = (t) => {
   const el = document.getElementById('successMessage');
   el.textContent = t;
@@ -22,7 +18,7 @@ const ok = (t) => {
   setTimeout(() => el.classList.add('d-none'), 2200);
 };
 
-// Dinero
+
 function money(n) {
   return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' })
     .format(Number(n) || 0);
