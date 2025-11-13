@@ -1,17 +1,16 @@
-// --- Protección de acceso ---
+
 import './guard.js';
 
-// --- Modales Bootstrap ---
+
 const modalMedicoEl = document.getElementById('doctorModal');
 const modalMedico = new bootstrap.Modal(modalMedicoEl);
 const modalVer = new bootstrap.Modal(document.getElementById('viewModal'));
 
-// --- Storage helpers (estándar: 'doctors' con campos en inglés) ---
+
 const getDoctors = () => JSON.parse(localStorage.getItem('doctors')) || [];
 const setDoctors = (arr) => {
-  // guardo estándar (inglés) para que "Nuestros Profesionales" lo lea
   localStorage.setItem('doctors', JSON.stringify(arr));
-  // espejo (español) por compat si algo del proyecto lo usa
+  
   const espejo = arr.map(d => ({
     id: d.id,
     nombre: d.name,
@@ -27,7 +26,7 @@ const setDoctors = (arr) => {
   localStorage.setItem('doctores', JSON.stringify(espejo));
 };
 
-// Lee especialidades desde 'especialidades' (ES) o 'specialties' (EN) y normaliza
+
 const getSpecialties = () => {
   try {
     const es = localStorage.getItem('especialidades');
@@ -38,7 +37,7 @@ const getSpecialties = () => {
   } catch { return []; }
 };
 
-// --- Migración (de 'doctores' ES o 'doctors' viejo a estándar EN) ---
+
 function migrateDoctors() {
   const en = JSON.parse(localStorage.getItem('doctors') || '[]');
   const es = JSON.parse(localStorage.getItem('doctores') || '[]');
@@ -57,10 +56,10 @@ function migrateDoctors() {
     instagram: d.instagram ?? ''
   }));
 
-  setDoctors(migrated); // también deja el espejo 'doctores'
+  setDoctors(migrated); 
 }
 
-// --- UI helpers ---
+
 const showSuccessMessage = (txt) => {
   const el = document.getElementById('successMessage');
   el.textContent = txt;
@@ -68,7 +67,7 @@ const showSuccessMessage = (txt) => {
   setTimeout(() => el.classList.add('d-none'), 2500);
 };
 
-// --- Render tabla ---
+
 function renderTable() {
   const tbody = document.querySelector('#doctorsTable tbody');
   tbody.innerHTML = '';
@@ -100,7 +99,7 @@ function renderTable() {
   });
 }
 
-// --- Cargar especialidades en el select ---
+
 function populateSpecialtiesSelect() {
   const list = getSpecialties();
   const sel = document.getElementById('doctorSpecialty');
@@ -113,14 +112,14 @@ function populateSpecialtiesSelect() {
   sel.innerHTML = '<option value="" disabled selected>Seleccione una especialidad</option>';
   list.forEach(s => {
     const opt = document.createElement('option');
-    opt.value = s.name;       // usamos 'name' normalizado
+    opt.value = s.name;       
     opt.textContent = s.name;
     sel.appendChild(opt);
   });
   return true;
 }
 
-// --- Formulario (abre modal) ---
+
 function mostrarFormulario(doctor = {}) {
   document.getElementById('formTitle').textContent = doctor.id ? 'Modificar Médico' : 'Nuevo Médico';
 
@@ -135,7 +134,7 @@ function mostrarFormulario(doctor = {}) {
   document.getElementById('doctorHorario').value = doctor.horario || '';
   document.getElementById('doctorObras').value = doctor.obras || '';
 
-  // Llenamos especialidades SIEMPRE al abrir el modal
+ 
   const ok = populateSpecialtiesSelect();
   document.getElementById('doctorSpecialty').value = doctor.specialty || '';
 
@@ -145,7 +144,7 @@ function mostrarFormulario(doctor = {}) {
   modalMedico.show();
 }
 
-// --- Validaciones básicas ---
+
 function validateDoctor(d) {
   if (!d.name?.trim()) return 'Nombre requerido';
   if (!d.specialty?.trim()) return 'Especialidad requerida';
@@ -154,7 +153,7 @@ function validateDoctor(d) {
   return null;
 }
 
-// --- Submit del formulario ---
+
 document.getElementById('doctorForm')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const id = parseInt(document.getElementById('doctorId').value || '0', 10);
@@ -190,7 +189,7 @@ document.getElementById('doctorForm')?.addEventListener('submit', (e) => {
   showSuccessMessage('Médico guardado correctamente');
 });
 
-// --- Acciones ver / editar / eliminar ---
+
 document.addEventListener('click', (e) => {
   if (e.target.closest('.btn-ver')) {
     const id = parseInt(e.target.closest('.btn-ver').dataset.id);
@@ -224,17 +223,17 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// --- Botón "Nuevo Médico": poblar especialidades y abrir modal ---
+
 document.getElementById('newDoctor')?.addEventListener('click', () => {
-  // Limpio formulario
+  
   document.getElementById('doctorForm').reset();
   document.getElementById('doctorId').value = '';
-  // Relleno especialidades SIEMPRE desde LocalStorage
+  
   populateSpecialtiesSelect();
   modalMedico.show();
 });
 
-// --- Export CSV ---
+
 document.getElementById('exportCsvBtn')?.addEventListener('click', () => {
   const arr = getDoctors();
   if (!arr.length) { alert('No hay datos para exportar'); return; }
@@ -251,7 +250,7 @@ document.getElementById('exportCsvBtn')?.addEventListener('click', () => {
   showSuccessMessage('Archivo CSV generado');
 });
 
-// --- Init ---
+
 document.addEventListener('DOMContentLoaded', () => {
   migrateDoctors();
   renderTable();

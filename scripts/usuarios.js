@@ -142,4 +142,4 @@ document.addEventListener('click', e => {
   userViewModal.show();
 });
 
-document.addEventListener('DOMContentLoaded', loadUsers);
+document.addEventListener('DOMContentLoaded', loadUsers)
