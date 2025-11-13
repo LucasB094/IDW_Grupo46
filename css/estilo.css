@@ -434,18 +434,12 @@ body.dark-mode .table-responsive {
   border-color: #495057;
 }
 
-/* ===========================
-   MODALES LINDOS 💅
-   =========================== */
-
-/* Backdrop con blur y tono */
 .modal-backdrop.show {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   background-color: rgba(12, 14, 20, .35);
 }
 
-/* Animación: zoom + slide suave */
 .modal.fade .modal-dialog {
   transform: translateY(16px) scale(.98);
   transition:
@@ -458,7 +452,6 @@ body.dark-mode .table-responsive {
   opacity: 1;
 }
 
-/* Contenedor principal con glassmorphism sutil */
 .modal-content {
   border: 0;
   border-radius: 18px;
@@ -469,7 +462,6 @@ body.dark-mode .table-responsive {
   -webkit-backdrop-filter: blur(8px);
 }
 
-/* Header con leve degradé y separación suave */
 .modal-header {
   border: 0;
   padding: 1rem 1.25rem 0.5rem;
@@ -481,13 +473,11 @@ body.dark-mode .table-responsive {
   letter-spacing: .2px;
 }
 
-/* Footer sin borde duro */
 .modal-footer {
   border: 0;
   padding-top: 0;
 }
 
-/* Botón de cierre más visible sobre fondos claros/oscuros */
 .btn-close {
   filter: brightness(0) saturate(0) invert(20%);
   opacity: .6;
@@ -495,7 +485,6 @@ body.dark-mode .table-responsive {
 }
 .btn-close:hover { opacity: 1; transform: scale(1.05); }
 
-/* Inputs más “premium” */
 .modal-content .form-control,
 .modal-content .form-select {
   border-radius: 12px;
@@ -504,12 +493,11 @@ body.dark-mode .table-responsive {
 }
 .modal-content .form-control:focus,
 .modal-content .form-select:focus {
-  border-color: rgba(25,135,84,.45); /* tono Bootstrap success */
+  border-color: rgba(25,135,84,.45);
   box-shadow: 0 0 0 .2rem rgba(25,135,84,.15);
   transform: translateY(-1px);
 }
 
-/* Botones principales con sombra suave */
 .modal-content .btn.btn-success,
 .modal-content .btn.btn-primary {
   border-radius: 12px;
@@ -519,7 +507,6 @@ body.dark-mode .table-responsive {
   border-radius: 12px;
 }
 
-/* Tarjeta de login “avatar” si la usás */
 .login-modal-custom .login-avatar {
   width: 80px; height: 80px; object-fit: cover;
   border: 3px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,.2);
@@ -529,7 +516,6 @@ body.dark-mode .table-responsive {
   transform: translate(-50%, -50%);
 }
 
-/* Dark mode (si tu toggle agrega .dark-mode al body) */
 body.dark-mode .modal-content {
   background: linear-gradient(180deg, rgba(22,24,29,.85), rgba(22,24,29,.92));
   color: #e8eaed;
@@ -550,7 +536,6 @@ body.dark-mode .modal-content .form-control::placeholder {
   color: rgba(232,234,237,.55);
 }
 
-/* Respeto accesibilidad: reduce motion */
 @media (prefers-reduced-motion: reduce) {
   .modal.fade .modal-dialog,
   .modal.show .modal-dialog {

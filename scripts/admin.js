@@ -1,17 +1,12 @@
-// --- Protección de acceso ---
 import './guard.js';
 
-// --- Modales Bootstrap ---
 const modalMedicoEl = document.getElementById('doctorModal');
 const modalMedico = new bootstrap.Modal(modalMedicoEl);
 const modalVer = new bootstrap.Modal(document.getElementById('viewModal'));
 
-// --- Storage helpers (estándar: 'doctors' con campos en inglés) ---
 const getDoctors = () => JSON.parse(localStorage.getItem('doctors')) || [];
 const setDoctors = (arr) => {
-  // guardo estándar (inglés) para que "Nuestros Profesionales" lo lea
   localStorage.setItem('doctors', JSON.stringify(arr));
-  // espejo (español) por compat si algo del proyecto lo usa
   const espejo = arr.map(d => ({
     id: d.id,
     nombre: d.name,
@@ -27,18 +22,8 @@ const setDoctors = (arr) => {
   localStorage.setItem('doctores', JSON.stringify(espejo));
 };
 
-// Lee especialidades desde 'especialidades' (ES) o 'specialties' (EN) y normaliza
-const getSpecialties = () => {
-  try {
-    const es = localStorage.getItem('especialidades');
-    const en = localStorage.getItem('specialties');
-    const raw = es || en || '[]';
-    const list = JSON.parse(raw);
-    return Array.isArray(list) ? list.map(e => ({ id: e.id, name: e.name ?? e.nombre ?? '' })) : [];
-  } catch { return []; }
-};
+const getSpecialties = () => JSON.parse(localStorage.getItem('specialties')) || [];
 
-// --- Migración (de 'doctores' ES o 'doctors' viejo a estándar EN) ---
 function migrateDoctors() {
   const en = JSON.parse(localStorage.getItem('doctors') || '[]');
   const es = JSON.parse(localStorage.getItem('doctores') || '[]');
@@ -57,10 +42,9 @@ function migrateDoctors() {
     instagram: d.instagram ?? ''
   }));
 
-  setDoctors(migrated); // también deja el espejo 'doctores'
+  setDoctors(migrated); 
 }
 
-// --- UI helpers ---
 const showSuccessMessage = (txt) => {
   const el = document.getElementById('successMessage');
   el.textContent = txt;
@@ -68,7 +52,6 @@ const showSuccessMessage = (txt) => {
   setTimeout(() => el.classList.add('d-none'), 2500);
 };
 
-// --- Render tabla ---
 function renderTable() {
   const tbody = document.querySelector('#doctorsTable tbody');
   tbody.innerHTML = '';
@@ -83,13 +66,13 @@ function renderTable() {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${d.id}</td>
-      <td class="fw-semibold">${d.name || ''}</td>
-      <td>${d.specialty || ''}</td>
-      <td>${d.matricula || ''}</td>
-      <td>${d.email || ''}</td>
-      <td>${d.phone || ''}</td>
-      <td>${d.horario || ''}</td>
-      <td>${d.obras || ''}</td>
+      <td>${d.name}</td>
+      <td>${d.specialty}</td>
+      <td>${d.matricula || '-'}</td>
+      <td>${d.email || '-'}</td>
+      <td>${d.phone || '-'}</td>
+      <td>${d.horario || '-'}</td>
+      <td>${d.obras || '-'}</td>
       <td class="text-end">
         <button class="btn btn-info btn-sm btn-ver" data-id="${d.id}" title="Ver"><i class="fas fa-eye"></i></button>
         <button class="btn btn-warning btn-sm btn-editar" data-id="${d.id}" title="Editar"><i class="fas fa-edit"></i></button>
@@ -100,7 +83,6 @@ function renderTable() {
   });
 }
 
-// --- Cargar especialidades en el select ---
 function populateSpecialtiesSelect() {
   const list = getSpecialties();
   const sel = document.getElementById('doctorSpecialty');
@@ -113,14 +95,13 @@ function populateSpecialtiesSelect() {
   sel.innerHTML = '<option value="" disabled selected>Seleccione una especialidad</option>';
   list.forEach(s => {
     const opt = document.createElement('option');
-    opt.value = s.name;       // usamos 'name' normalizado
+    opt.value = s.name;
     opt.textContent = s.name;
     sel.appendChild(opt);
   });
   return true;
 }
 
-// --- Formulario (abre modal) ---
 function mostrarFormulario(doctor = {}) {
   document.getElementById('formTitle').textContent = doctor.id ? 'Modificar Médico' : 'Nuevo Médico';
 
@@ -135,7 +116,6 @@ function mostrarFormulario(doctor = {}) {
   document.getElementById('doctorHorario').value = doctor.horario || '';
   document.getElementById('doctorObras').value = doctor.obras || '';
 
-  // Llenamos especialidades SIEMPRE al abrir el modal
   const ok = populateSpecialtiesSelect();
   document.getElementById('doctorSpecialty').value = doctor.specialty || '';
 
@@ -145,22 +125,45 @@ function mostrarFormulario(doctor = {}) {
   modalMedico.show();
 }
 
-// --- Validaciones básicas ---
-function validateDoctor(d) {
-  if (!d.name?.trim()) return 'Nombre requerido';
-  if (!d.specialty?.trim()) return 'Especialidad requerida';
-  if (!d.matricula?.trim()) return 'Matrícula requerida';
-  if (d.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return 'Email inválido';
-  return null;
+function cerrarFormulario() {
+  modalMedico.hide();
 }
 
-// --- Submit del formulario ---
-document.getElementById('doctorForm')?.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const id = parseInt(document.getElementById('doctorId').value || '0', 10);
+function validateDoctor(d, doctors) {
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email);
+  const phoneOk = d.phone && d.phone.trim().length >= 6;
+  const nameOk = d.name && d.name.trim().length >= 3;
+  const specOk = !!d.specialty;
+  const matOk = d.matricula && d.matricula.trim().length >= 3;
 
-  const doc = {
-    id,
+  if (!nameOk) throw new Error('Nombre inválido');
+  if (!specOk) throw new Error('Seleccione especialidad');
+  if (!matOk) throw new Error('Matrícula obligatoria');
+  if (!emailOk) throw new Error('Email inválido');
+  if (!phoneOk) throw new Error('Teléfono inválido');
+
+  const dup = doctors.find(x => x.matricula === d.matricula && x.id !== d.id);
+  if (dup) throw new Error('La matrícula ya existe');
+}
+
+modalMedicoEl.addEventListener('hidden.bs.modal', () => {
+  document.getElementById('doctorForm').reset();
+  const submitBtn = document.querySelector('#doctorForm button[type="submit"]');
+  if (submitBtn) submitBtn.disabled = false;
+});
+
+document.getElementById('newDoctor')?.addEventListener('click', () => {
+  mostrarFormulario();
+});
+
+document.getElementById('doctorForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const prev = getDoctors();
+  const id = parseInt(document.getElementById('doctorId').value) || null;
+
+  const nuevo = {
+    id: id || (Math.max(...prev.map(d => d.id), 0) + 1),
     name: document.getElementById('doctorName').value.trim(),
     specialty: document.getElementById('doctorSpecialty').value,
     matricula: document.getElementById('doctorMatricula').value.trim(),
@@ -172,25 +175,26 @@ document.getElementById('doctorForm')?.addEventListener('submit', (e) => {
     instagram: document.getElementById('doctorInstagram').value.trim()
   };
 
-  const err = validateDoctor(doc);
-  if (err) { alert(err); return; }
-
-  const arr = getDoctors();
-  if (id) {
-    const idx = arr.findIndex(x => x.id === id);
-    if (idx >= 0) arr[idx] = doc;
-  } else {
-    doc.id = Math.max(0, ...arr.map(x => x.id)) + 1;
-    arr.push(doc);
+  try {
+    validateDoctor(nuevo, prev);
+  } catch (err) {
+    alert(err.message);
+    return;
   }
 
-  setDoctors(arr);
+  let out = prev;
+  if (id) {
+    out = out.map(d => d.id === id ? nuevo : d);
+    showSuccessMessage('Médico actualizado');
+  } else {
+    out.push(nuevo);
+    showSuccessMessage('Médico creado');
+  }
+  setDoctors(out);
   renderTable();
-  modalMedico.hide();
-  showSuccessMessage('Médico guardado correctamente');
+  cerrarFormulario();
 });
 
-// --- Acciones ver / editar / eliminar ---
 document.addEventListener('click', (e) => {
   if (e.target.closest('.btn-ver')) {
     const id = parseInt(e.target.closest('.btn-ver').dataset.id);
@@ -224,24 +228,10 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// --- Botón "Nuevo Médico": poblar especialidades y abrir modal ---
-document.getElementById('newDoctor')?.addEventListener('click', () => {
-  // Limpio formulario
-  document.getElementById('doctorForm').reset();
-  document.getElementById('doctorId').value = '';
-  // Relleno especialidades SIEMPRE desde LocalStorage
-  populateSpecialtiesSelect();
-  modalMedico.show();
-});
-
-// --- Export CSV ---
 document.getElementById('exportCsvBtn')?.addEventListener('click', () => {
-  const arr = getDoctors();
-  if (!arr.length) { alert('No hay datos para exportar'); return; }
-
-  const head = ['id','name','specialty','matricula','email','phone','horario','obras','image','instagram'];
-  const csv = [head.join(',')].concat(arr.map(d => head.map(k => `"${String(d[k] ?? '').replace(/"/g,'""')}"`).join(','))).join('\n');
-
+  const cols = ['id','name','specialty','matricula','email','phone','horario','obras','image','instagram'];
+  const rows = getDoctors().map(d => cols.map(c => (d[c] ?? '').toString().replace(/"/g, '""')));
+  const csv = [ cols.join(','), ...rows.map(r => r.map(v => `"${v}"`).join(',')) ].join('\n');
   const BOM = '\uFEFF';
   const blob = new Blob([BOM + csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
@@ -251,7 +241,6 @@ document.getElementById('exportCsvBtn')?.addEventListener('click', () => {
   showSuccessMessage('Archivo CSV generado');
 });
 
-// --- Init ---
 document.addEventListener('DOMContentLoaded', () => {
   migrateDoctors();
   renderTable();
