@@ -1,16 +1,16 @@
-// scripts/usuarios.js
+
 import './guard.js';
 
-// ====== Config ======
+
 const PAGE_SIZE = 10;
 const API_URL = 'https://dummyjson.com/users?limit=100';
 
-// ====== Estado ======
+
 let ALL = [];
 let VIEW = [];
 let page = 1;
 
-// ====== Refs UI ======
+
 const tbody       = document.querySelector('#usersTable tbody');
 const usersCount  = document.getElementById('usersCount');
 const pageInfo    = document.getElementById('pageInfo');
@@ -27,7 +27,7 @@ const vUsername = document.getElementById('vUsername');
 const vEmpresa  = document.getElementById('vEmpresa');
 const vPuesto   = document.getElementById('vPuesto');
 
-// ====== Utils ======
+
 function sanitizeUser(u) {
   const fullName = [u?.firstName, u?.lastName].filter(Boolean).join(' ');
   return {
@@ -86,14 +86,14 @@ function applyFilter(q) {
   render();
 }
 
-// ====== Carga ======
+
 async function loadUsers() {
   errorBox?.classList.add('d-none');
   tbody.innerHTML = `
     <tr><td colspan="6" class="text-center text-muted py-4">Cargando usuarios…</td></tr>`;
 
   try {
-    // TEST rápido para ver si hay bloqueo de red/CORS
+    
     console.log('[usuarios] Haciendo fetch a:', API_URL);
     const res = await fetch(API_URL, { cache: 'no-store' });
     console.log('[usuarios] status:', res.status);
@@ -122,7 +122,7 @@ async function loadUsers() {
   }
 }
 
-// ====== Eventos ======
+
 searchInput?.addEventListener('input', e => applyFilter(e.target.value));
 prevBtn?.addEventListener('click', () => { if (page > 1) { page--; render(); } });
 nextBtn?.addEventListener('click', () => { page++; render(); });
